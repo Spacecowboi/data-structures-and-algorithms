@@ -134,7 +134,14 @@ This data could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
-  return arr.sort((a, b) => a[property] - b[property]);
+  return arr.sort((a, b) => {
+    if (typeof a[property] === 'number' && typeof b[property] === 'number') {
+      return a[property] - b[property];
+    } else if (typeof a[property] === 'string' && typeof b[property] === 'string') {
+      return a[property].localeCompare(b[property]);
+    }
+    return 0;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
